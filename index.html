@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Admin Dashboard - ตรวจสอบล็อตเตอรี่</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header>
+  <div>Admin Dashboard - ตรวจสอบล็อตเตอรี่</div>
+  <!-- ปุ่มไป User เอาออก -->
+</header>
+
+<main>
+  <div class="filter" style="margin-bottom:1rem;">
+    <label for="filterStatus">กรองสถานะ: </label>
+    <select id="filterStatus">
+      <option value="all">ทั้งหมด</option>
+      <option value="pending">รอดำเนินการ</option>
+      <option value="checked">ตรวจสอบแล้ว</option>
+      <option value="rejected">ไม่ถูกรางวัล</option>
+    </select>
+  </div>
+
+  <table id="adminTable">
+    <thead>
+      <tr>
+        <th>รหัส</th>
+        <th>เลขล็อตเตอรี่</th>
+        <th>วันที่ซื้อ</th>
+        <th>รูปภาพ</th>
+        <th>สถานะ</th>
+        <th>ผลตรวจสอบ</th>
+        <th>อัปเดตผล</th>
+        <th>ลบรายการ</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <p class="no-data" id="adminNoDataMsg">ไม่มีข้อมูลรายการ</p>
+</main>
+
+<script src="admin.js"></script>
+
+</body>
+</html>
