@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>User - ส่งเลขล็อตเตอรี่</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header>
+  <div>User - ส่งเลขล็อตเตอรี่</div>
+  <!-- ปุ่มไป Admin เอาออก -->
+</header>
+
+<main>
+  <form id="userForm" enctype="multipart/form-data" autocomplete="off">
+    <label for="lotteryNumber">ชุดที่่</label>
+    <input type="text" id="lotteryNumber" maxlength="2" pattern="\d{2}" placeholder="เช่น 00, 01" required />
+
+    <label for="purchaseDate">วันที่ซื้อ</label>
+    <input type="date" id="purchaseDate" required />
+
+    <label for="imageFile">อัปโหลดรูปภาพ (ใบล็อตเตอรี่ หรือสลิป) (ถ้ามี)</label>
+    <input type="file" id="imageFile" accept="image/*" />
+
+    <button type="submit" class="submit-btn">ส่งตรวจสอบ</button>
+  </form>
+
+  <h3>
+    ประวัติการตรวจสอบล็อตเตอรี่ของคุณ
+    <button id="refreshHistoryBtn" title="รีเฟรชประวัติ"
+      style="font-size:0.9rem; margin-left:8px; padding:2px 8px; cursor:pointer; border-radius:6px; border:none; background:#1e88e5; color:#fff;">รีเฟรช</button>
+  </h3>
+
+  <table id="userHistoryTable">
+    <thead>
+      <tr>
+        <th>เลขล็อตเตอรี่</th>
+        <th>วันที่ซื้อ</th>
+        <th>สถานะ</th>
+        <th>ผลตรวจสอบ</th>
+        <th>รูปภาพ</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <p class="no-data" id="userNoDataMsg">ยังไม่มีรายการตรวจสอบ</p>
+</main>
+
+
+<script src="user.js"></script>
+
+</body>
+</html>
