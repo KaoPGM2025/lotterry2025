@@ -3,46 +3,53 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Admin Dashboard - ตรวจสอบล็อตเตอรี่</title>
+<title>User - ส่งเลขล็อตเตอรี่</title>
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
 <header>
-  <div>Admin Dashboard - ตรวจสอบล็อตเตอรี่</div>
-  <!-- ปุ่มไป User เอาออก -->
+  <div>User - ส่งเลขล็อตเตอรี่</div>
+  <!-- ปุ่มไป Admin เอาออก -->
 </header>
 
 <main>
-  <div class="filter" style="margin-bottom:1rem;">
-    <label for="filterStatus">กรองสถานะ: </label>
-    <select id="filterStatus">
-      <option value="all">ทั้งหมด</option>
-      <option value="pending">รอดำเนินการ</option>
-      <option value="checked">ตรวจสอบแล้ว</option>
-      <option value="rejected">ไม่ถูกรางวัล</option>
-    </select>
-  </div>
+  <form id="userForm" enctype="multipart/form-data" autocomplete="off">
+    <label for="lotteryNumber">ชุดที่่</label>
+    <input type="text" id="lotteryNumber" maxlength="2" pattern="\d{2}" placeholder="เช่น 00, 01" required />
 
-  <table id="adminTable">
+    <label for="purchaseDate">วันที่ซื้อ</label>
+    <input type="date" id="purchaseDate" required />
+
+    <label for="imageFile">อัปโหลดรูปภาพ (ใบล็อตเตอรี่ หรือสลิป) (ถ้ามี)</label>
+    <input type="file" id="imageFile" accept="image/*" />
+
+    <button type="submit" class="submit-btn">ส่งตรวจสอบ</button>
+  </form>
+
+  <h3>
+    ประวัติการตรวจสอบล็อตเตอรี่ของคุณ
+    <button id="refreshHistoryBtn" title="รีเฟรชประวัติ"
+      style="font-size:0.9rem; margin-left:8px; padding:2px 8px; cursor:pointer; border-radius:6px; border:none; background:#1e88e5; color:#fff;">รีเฟรช</button>
+  </h3>
+
+  <table id="userHistoryTable">
     <thead>
       <tr>
-        <th>รหัส</th>
         <th>เลขล็อตเตอรี่</th>
         <th>วันที่ซื้อ</th>
-        <th>รูปภาพ</th>
         <th>สถานะ</th>
         <th>ผลตรวจสอบ</th>
-        <th>อัปเดตผล</th>
-        <th>ลบรายการ</th>
+        <th>รูปภาพ</th>
       </tr>
     </thead>
     <tbody></tbody>
   </table>
-  <p class="no-data" id="adminNoDataMsg">ไม่มีข้อมูลรายการ</p>
+  <p class="no-data" id="userNoDataMsg">ยังไม่มีรายการตรวจสอบ</p>
 </main>
 
-<script src="admin.js"></script>
+
+<script src="user.js"></script>
 
 </body>
 </html>
