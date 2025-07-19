@@ -1,11 +1,273 @@
 <!DOCTYPE html>
-<html>
-<head><title>Home</title></head>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WebApp 2025</title>
+  <style>
+    :root {
+      --primary: #1a73e8;
+      --background: #f9f9f9;
+      --text: #202124;
+      --surface: #ffffff;
+      --border: #dadce0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    body {
+      background-color: var(--background);
+      color: var(--text);
+    }
+
+    header {
+      background-color: var(--primary);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.5rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-around;
+      background-color: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav button {
+      flex: 1;
+      padding: 1rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--text);
+      transition: background 0.2s;
+    }
+
+    nav button:hover {
+      background-color: #eee;
+    }
+
+    nav button.active {
+      border-bottom: 3px solid var(--primary);
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    section {
+      padding: 2rem;
+      display: none;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    form {
+      max-width: 600px;
+      width: 90%;
+      margin: 2rem auto 0;
+      background: var(--surface);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    .form-row {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.95rem;
+      color: #5f6368;
+      margin-bottom: 0.5rem;
+    }
+
+    input[type="text"],
+    input[type="file"] {
+      width: 100%;
+      padding: 0.85rem;
+      font-size: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.15);
+    }
+
+    button[type="submit"] {
+      background-color: var(--primary);
+      color: white;
+      padding: 0.8rem 1.8rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.2s;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #0f66d0;
+    }
+
+    #preview img,
+    #imagePreviewMain img {
+      margin-top: 1rem;
+      max-width: 100%;
+      border-radius: 12px;
+    }
+  </style>
+</head>
 <body>
-<h1>Welcome to Home</h1>
-<nav>
-  <a href="about.html">About</a> | 
-  <a href="contact.html">Contact</a>
-</nav>
+
+  <header>WebApp 2025</header>
+
+  <nav>
+    <button id="homeBtn" class="active">หน้าหลัก</button>
+    <button id="imageBtn">เก็บภาพ</button>
+    <button id="displayBtn">แสดงผล</button>
+    <button id="settingsBtn">ตั้งค่า</button>
+  </nav>
+
+  <main>
+    <!-- หน้าหลัก -->
+    <section id="homeSection" class="active">
+      <h2>ยินดีต้อนรับ!</h2>
+      <form id="mainForm">
+        <div class="form-row">
+          <label for="input1">ช่องกรอก 1</label>
+          <input type="text" id="input1" placeholder="ใส่ข้อมูล..." required />
+        </div>
+        <div class="form-row">
+          <label for="input2">ช่องกรอก 2</label>
+          <input type="text" id="input2" placeholder="ใส่ข้อมูล..." required />
+        </div>
+        <div class="form-row">
+          <label for="input3">ช่องกรอก 3</label>
+          <input type="text" id="input3" placeholder="ใส่ข้อมูล..." required />
+        </div>
+
+        <!-- แสดงภาพที่อัปโหลดมาจากหน้าเก็บภาพ -->
+        <div id="imagePreviewMain"></div>
+
+        <div class="form-row" style="text-align:right">
+          <button type="submit">ส่งข้อมูล</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- แสดงผล -->
+    <section id="displaySection">
+      <h2>แสดงผล</h2>
+      <p>ข้อมูลจะแสดงที่นี่</p>
+    </section>
+
+    <!-- ตั้งค่า -->
+    <section id="settingsSection">
+      <h2>ตั้งค่า</h2>
+      <p>ตั้งค่าระบบที่นี่</p>
+    </section>
+
+    <!-- เก็บภาพ -->
+    <section id="imageSection">
+      <h2>เก็บภาพ</h2>
+      <form>
+        <div class="form-row">
+          <label for="imageInput">อัปโหลดรูปภาพ</label>
+          <input type="file" id="imageInput" accept="image/*" />
+        </div>
+        <div id="preview"></div>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    // เปลี่ยนหน้าตามเมนู
+    const sections = {
+      homeBtn: "homeSection",
+      displayBtn: "displaySection",
+      settingsBtn: "settingsSection",
+      imageBtn: "imageSection"
+    };
+
+    Object.keys(sections).forEach(btnId => {
+      document.getElementById(btnId).addEventListener("click", () => {
+        document.querySelectorAll("nav button").forEach(btn => btn.classList.remove("active"));
+        document.getElementById(btnId).classList.add("active");
+
+        document.querySelectorAll("main section").forEach(sec => sec.classList.remove("active"));
+        document.getElementById(sections[btnId]).classList.add("active");
+
+        // โหลดภาพจาก localStorage เวลากลับหน้า home
+        if (btnId === "homeBtn") {
+          loadImageToMain();
+        }
+      });
+    });
+
+    // ฟอร์มข้อมูล
+    document.getElementById("mainForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const val1 = document.getElementById("input1").value;
+      const val2 = document.getElementById("input2").value;
+      const val3 = document.getElementById("input3").value;
+      alert(`ข้อมูลที่คุณกรอก:\n- ช่อง 1: ${val1}\n- ช่อง 2: ${val2}\n- ช่อง 3: ${val3}`);
+      this.reset();
+      // เคลียร์ภาพหลังส่งข้อมูลด้วย
+      localStorage.removeItem('uploadedImage');
+      document.getElementById('imagePreviewMain').innerHTML = '';
+    });
+
+    // อัปโหลดและแสดงภาพหน้าเก็บภาพ พร้อมเก็บใน localStorage
+    document.getElementById("imageInput").addEventListener("change", function () {
+      const file = this.files[0];
+      const preview = document.getElementById("preview");
+      if (file && file.type.startsWith("image/")) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          preview.innerHTML = `<img src="${e.target.result}" alt="preview" />`;
+          // เก็บภาพลง localStorage (base64)
+          localStorage.setItem('uploadedImage', e.target.result);
+        };
+        reader.readAsDataURL(file);
+      } else {
+        preview.innerHTML = `<p>กรุณาเลือกไฟล์ภาพเท่านั้น</p>`;
+        localStorage.removeItem('uploadedImage');
+      }
+    });
+
+    // โหลดภาพจาก localStorage ไปแสดงในหน้าหลักใต้ช่องกรอก 3
+    function loadImageToMain() {
+      const imageData = localStorage.getItem('uploadedImage');
+      const imagePreviewMain = document.getElementById('imagePreviewMain');
+      if (imageData) {
+        imagePreviewMain.innerHTML = `<img src="${imageData}" alt="Uploaded Image" />`;
+      } else {
+        imagePreviewMain.innerHTML = '';
+      }
+    }
+
+    // โหลดภาพถ้าเปิดหน้าแรกครั้งแรก
+    window.addEventListener('load', () => {
+      if (document.getElementById('homeSection').classList.contains('active')) {
+        loadImageToMain();
+      }
+    });
+  </script>
+
 </body>
 </html>
+
