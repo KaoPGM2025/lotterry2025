@@ -1,273 +1,220 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WebApp 2025</title>
-  <style>
-    :root {
-      --primary: #1a73e8;
-      --background: #f9f9f9;
-      --text: #202124;
-      --surface: #ffffff;
-      --border: #dadce0;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Roboto', sans-serif;
-    }
-
-    body {
-      background-color: var(--background);
-      color: var(--text);
-    }
-
-    header {
-      background-color: var(--primary);
-      color: white;
-      padding: 1rem;
-      text-align: center;
-      font-size: 1.5rem;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    }
-
-    nav {
-      display: flex;
-      justify-content: space-around;
-      background-color: var(--surface);
-      border-bottom: 1px solid var(--border);
-    }
-
-    nav button {
-      flex: 1;
-      padding: 1rem;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 1rem;
-      color: var(--text);
-      transition: background 0.2s;
-    }
-
-    nav button:hover {
-      background-color: #eee;
-    }
-
-    nav button.active {
-      border-bottom: 3px solid var(--primary);
-      font-weight: bold;
-      color: var(--primary);
-    }
-
-    section {
-      padding: 2rem;
-      display: none;
-    }
-
-    section.active {
-      display: block;
-    }
-
-    form {
-      max-width: 600px;
-      width: 90%;
-      margin: 2rem auto 0;
-      background: var(--surface);
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    }
-
-    .form-row {
-      margin-bottom: 1.5rem;
-    }
-
-    label {
-      display: block;
-      font-size: 0.95rem;
-      color: #5f6368;
-      margin-bottom: 0.5rem;
-    }
-
-    input[type="text"],
-    input[type="file"] {
-      width: 100%;
-      padding: 0.85rem;
-      font-size: 1rem;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-
-    input:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.15);
-    }
-
-    button[type="submit"] {
-      background-color: var(--primary);
-      color: white;
-      padding: 0.8rem 1.8rem;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: background 0.2s;
-    }
-
-    button[type="submit"]:hover {
-      background-color: #0f66d0;
-    }
-
-    #preview img,
-    #imagePreviewMain img {
-      margin-top: 1rem;
-      max-width: 100%;
-      border-radius: 12px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ฟอร์มผู้ใช้</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f0f9ff;
+        }
+        .loader {
+            border-top-color: #3498db;
+            -webkit-animation: spinner 1.5s linear infinite;
+            animation: spinner 1.5s linear infinite;
+        }
+        @-webkit-keyframes spinner {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+        @keyframes spinner {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
-
-  <header>WebApp 2025</header>
-
-  <nav>
-    <button id="homeBtn" class="active">หน้าหลัก</button>
-    <button id="imageBtn">เก็บภาพ</button>
-    <button id="displayBtn">แสดงผล</button>
-    <button id="settingsBtn">ตั้งค่า</button>
-  </nav>
-
-  <main>
-    <!-- หน้าหลัก -->
-    <section id="homeSection" class="active">
-      <h2>ยินดีต้อนรับ!</h2>
-      <form id="mainForm">
-        <div class="form-row">
-          <label for="input1">ช่องกรอก 1</label>
-          <input type="text" id="input1" placeholder="ใส่ข้อมูล..." required />
+    <div class="min-h-screen flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
+            <h1 class="text-2xl font-bold text-center text-blue-600 mb-6">ฟอร์มผู้ใช้</h1>
+            
+            <form id="userForm" class="space-y-6">
+                <div class="space-y-2">
+                    <label for="setNumber" class="block text-sm font-medium text-gray-700">ชุดที่</label>
+                    <input type="number" id="setNumber" name="setNumber" required
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                
+                <div class="space-y-2">
+                    <label for="date" class="block text-sm font-medium text-gray-700">วันที่</label>
+                    <input type="date" id="date" name="date" required
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                
+                <div class="space-y-2">
+                    <label class="block text-sm font-medium text-gray-700">อัพรูปภาพ</label>
+                    <div class="flex flex-col items-center space-y-4">
+                        <div id="imagePreviewContainer" class="hidden w-40 h-40 border-2 border-dashed border-gray-300 rounded-full flex items-center justify-center overflow-hidden">
+                            <img id="imagePreview" class="w-full h-full object-cover" src="#" alt="ตัวอย่างรูปภาพ">
+                        </div>
+                        <div class="flex items-center justify-center w-full">
+                            <label for="imageUpload" class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+                                <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                    <svg class="w-8 h-8 mb-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                                    </svg>
+                                    <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">คลิกเพื่ออัพโหลด</span></p>
+                                    <p class="text-xs text-gray-500">PNG, JPG หรือ JPEG</p>
+                                </div>
+                                <input id="imageUpload" type="file" accept="image/*" class="hidden" />
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" id="submitBtn" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors">
+                    บันทึกข้อมูล
+                </button>
+            </form>
+            
+            <!-- Loading Overlay -->
+            <div id="loadingOverlay" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
+                <div class="bg-white p-5 rounded-lg shadow-lg flex flex-col items-center">
+                    <div class="loader border-4 border-gray-200 rounded-full w-12 h-12 mb-4"></div>
+                    <p id="loadingText" class="text-gray-700">กำลังบันทึกข้อมูล...</p>
+                </div>
+            </div>
+            
+            <!-- Success Message -->
+            <div id="successMessage" class="hidden mt-4 p-4 bg-green-100 text-green-700 rounded-md">
+                <div class="flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <p>บันทึกข้อมูลสำเร็จ!</p>
+                </div>
+            </div>
+            
+            <!-- Error Message -->
+            <div id="errorMessage" class="hidden mt-4 p-4 bg-red-100 text-red-700 rounded-md">
+                <div class="flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                    </svg>
+                    <p id="errorText">เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง</p>
+                </div>
+            </div>
         </div>
-        <div class="form-row">
-          <label for="input2">ช่องกรอก 2</label>
-          <input type="text" id="input2" placeholder="ใส่ข้อมูล..." required />
-        </div>
-        <div class="form-row">
-          <label for="input3">ช่องกรอก 3</label>
-          <input type="text" id="input3" placeholder="ใส่ข้อมูล..." required />
-        </div>
+    </div>
 
-        <!-- แสดงภาพที่อัปโหลดมาจากหน้าเก็บภาพ -->
-        <div id="imagePreviewMain"></div>
-
-        <div class="form-row" style="text-align:right">
-          <button type="submit">ส่งข้อมูล</button>
-        </div>
-      </form>
-    </section>
-
-    <!-- แสดงผล -->
-    <section id="displaySection">
-      <h2>แสดงผล</h2>
-      <p>ข้อมูลจะแสดงที่นี่</p>
-    </section>
-
-    <!-- ตั้งค่า -->
-    <section id="settingsSection">
-      <h2>ตั้งค่า</h2>
-      <p>ตั้งค่าระบบที่นี่</p>
-    </section>
-
-    <!-- เก็บภาพ -->
-    <section id="imageSection">
-      <h2>เก็บภาพ</h2>
-      <form>
-        <div class="form-row">
-          <label for="imageInput">อัปโหลดรูปภาพ</label>
-          <input type="file" id="imageInput" accept="image/*" />
-        </div>
-        <div id="preview"></div>
-      </form>
-    </section>
-  </main>
-
-  <script>
-    // เปลี่ยนหน้าตามเมนู
-    const sections = {
-      homeBtn: "homeSection",
-      displayBtn: "displaySection",
-      settingsBtn: "settingsSection",
-      imageBtn: "imageSection"
-    };
-
-    Object.keys(sections).forEach(btnId => {
-      document.getElementById(btnId).addEventListener("click", () => {
-        document.querySelectorAll("nav button").forEach(btn => btn.classList.remove("active"));
-        document.getElementById(btnId).classList.add("active");
-
-        document.querySelectorAll("main section").forEach(sec => sec.classList.remove("active"));
-        document.getElementById(sections[btnId]).classList.add("active");
-
-        // โหลดภาพจาก localStorage เวลากลับหน้า home
-        if (btnId === "homeBtn") {
-          loadImageToMain();
-        }
-      });
-    });
-
-    // ฟอร์มข้อมูล
-    document.getElementById("mainForm").addEventListener("submit", function (e) {
-      e.preventDefault();
-      const val1 = document.getElementById("input1").value;
-      const val2 = document.getElementById("input2").value;
-      const val3 = document.getElementById("input3").value;
-      alert(`ข้อมูลที่คุณกรอก:\n- ช่อง 1: ${val1}\n- ช่อง 2: ${val2}\n- ช่อง 3: ${val3}`);
-      this.reset();
-      // เคลียร์ภาพหลังส่งข้อมูลด้วย
-      localStorage.removeItem('uploadedImage');
-      document.getElementById('imagePreviewMain').innerHTML = '';
-    });
-
-    // อัปโหลดและแสดงภาพหน้าเก็บภาพ พร้อมเก็บใน localStorage
-    document.getElementById("imageInput").addEventListener("change", function () {
-      const file = this.files[0];
-      const preview = document.getElementById("preview");
-      if (file && file.type.startsWith("image/")) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          preview.innerHTML = `<img src="${e.target.result}" alt="preview" />`;
-          // เก็บภาพลง localStorage (base64)
-          localStorage.setItem('uploadedImage', e.target.result);
-        };
-        reader.readAsDataURL(file);
-      } else {
-        preview.innerHTML = `<p>กรุณาเลือกไฟล์ภาพเท่านั้น</p>`;
-        localStorage.removeItem('uploadedImage');
-      }
-    });
-
-    // โหลดภาพจาก localStorage ไปแสดงในหน้าหลักใต้ช่องกรอก 3
-    function loadImageToMain() {
-      const imageData = localStorage.getItem('uploadedImage');
-      const imagePreviewMain = document.getElementById('imagePreviewMain');
-      if (imageData) {
-        imagePreviewMain.innerHTML = `<img src="${imageData}" alt="Uploaded Image" />`;
-      } else {
-        imagePreviewMain.innerHTML = '';
-      }
-    }
-
-    // โหลดภาพถ้าเปิดหน้าแรกครั้งแรก
-    window.addEventListener('load', () => {
-      if (document.getElementById('homeSection').classList.contains('active')) {
-        loadImageToMain();
-      }
-    });
-  </script>
-
-</body>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('userForm');
+            const imageUpload = document.getElementById('imageUpload');
+            const imagePreview = document.getElementById('imagePreview');
+            const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+            
+            // Set default date to today
+            document.getElementById('date').valueAsDate = new Date();
+            
+            // Handle image upload and preview
+            imageUpload.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        imagePreview.src = event.target.result;
+                        imagePreviewContainer.classList.remove('hidden');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            // Handle form submission
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const setNumber = document.getElementById('setNumber').value;
+                const date = document.getElementById('date').value;
+                const imageFile = imageUpload.files[0];
+                
+                if (!setNumber || !date || !imageFile) {
+                    showError('กรุณากรอกข้อมูลให้ครบถ้วน');
+                    return;
+                }
+                
+                showLoading('กำลังอัพโหลดและบันทึกข้อมูล...');
+                
+                try {
+                    // Convert image to base64
+                    const base64Image = await convertFileToBase64(imageFile);
+                    
+                    // Prepare data for submission
+                    const params = new URLSearchParams();
+                    params.append('setNumber', setNumber);
+                    params.append('date', date);
+                    params.append('fileName', imageFile.name);
+                    params.append('mimeType', imageFile.type);
+                    params.append('fileData', base64Image.split(',')[1]); // Remove the data:image/jpeg;base64, part
+                    
+                    // Submit data to Google Apps Script
+                    const scriptUrl = 'https://script.google.com/macros/s/AKfycbxVYgpEZW3WGftBHfoxXRh-4vGHgTUDLBqjv0y-uFhhrv8SSbJF48uD6VsabYF8v0It/exec';
+                    
+                    const response = await fetch(scriptUrl, {
+                        method: 'POST',
+                        body: params
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        hideLoading();
+                        showSuccess();
+                        form.reset();
+                        document.getElementById('date').valueAsDate = new Date();
+                        imagePreviewContainer.classList.add('hidden');
+                    } else {
+                        throw new Error(result.error || 'เกิดข้อผิดพลาดในการบันทึกข้อมูล');
+                    }
+                } catch (error) {
+                    hideLoading();
+                    showError(error.message || 'เกิดข้อผิดพลาดในการเชื่อมต่อ');
+                    console.error('Error:', error);
+                }
+            });
+            
+            // Helper function to convert file to base64
+            function convertFileToBase64(file) {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = () => resolve(reader.result);
+                    reader.onerror = error => reject(error);
+                    reader.readAsDataURL(file);
+                });
+            }
+            
+            // UI Helper functions
+            function showLoading(message) {
+                document.getElementById('loadingText').textContent = message || 'กำลังดำเนินการ...';
+                loadingOverlay.classList.remove('hidden');
+            }
+            
+            function hideLoading() {
+                loadingOverlay.classList.add('hidden');
+            }
+            
+            function showSuccess() {
+                successMessage.classList.remove('hidden');
+                setTimeout(() => {
+                    successMessage.classList.add('hidden');
+                }, 5000);
+            }
+            
+            function showError(message) {
+                errorText.textContent = message;
+                errorMessage.classList.remove('hidden');
+                setTimeout(() => {
+                    errorMessage.classList.add('hidden');
+                }, 5000);
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'963824e1010e731c',t:'MTc1MzI0MTg5Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-
