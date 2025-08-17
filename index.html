@@ -3,218 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AppFormLottery</title>
+    <title>404 - กำลังพัฒนา</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap');
-        body {
-            font-family: 'Sarabun', sans-serif;
-            background-color: #f0f9ff;
+        @keyframes spark {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1.2); }
         }
-        .loader {
-            border-top-color: #3498db;
-            -webkit-animation: spinner 1.5s linear infinite;
-            animation: spinner 1.5s linear infinite;
+        
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
         }
-        @-webkit-keyframes spinner {
-            0% { -webkit-transform: rotate(0deg); }
-            100% { -webkit-transform: rotate(360deg); }
+        
+        @keyframes wireBreak {
+            0% { stroke-dashoffset: 0; }
+            100% { stroke-dashoffset: 20; }
         }
-        @keyframes spinner {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        
+        @keyframes serverBlink {
+            0%, 50% { fill: #ef4444; }
+            51%, 100% { fill: #dc2626; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+        }
+        
+        .spark {
+            animation: spark 1.5s infinite;
+        }
+        
+        .flicker {
+            animation: flicker 2s infinite;
+        }
+        
+        .wire-break {
+            stroke-dasharray: 10, 10;
+            animation: wireBreak 3s infinite;
+        }
+        
+        .server-error {
+            animation: serverBlink 1s infinite;
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .glitch-text {
+            animation: glitch 0.3s infinite;
+        }
+        
+        .construction-bg {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%);
         }
     </style>
 </head>
-<body>
-    <div class="min-h-screen flex items-center justify-center p-4">
-        <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
-            <h1 class="text-2xl font-bold text-center text-blue-600 mb-6">AppFormLottery</h1>
-            
-            <form id="userForm" class="space-y-6">
-                <div class="space-y-2">
-                    <label for="setNumber" class="block text-sm font-medium text-gray-700">ชุดที่</label>
-                    <input type="number" id="setNumber" name="setNumber" required
-                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
+<body class="construction-bg min-h-screen flex items-center justify-center p-4">
+    <div class="text-center max-w-2xl mx-auto">
+        <!-- หัวข้อ 404 -->
+        <div class="mb-8">
+            <h1 class="text-8xl md:text-9xl font-bold text-yellow-400 glitch-text mb-4">404</h1>
+            <h2 class="text-2xl md:text-3xl font-semibold text-white mb-2 flicker">เว็บไซต์กำลังพัฒนา</h2>
+            <p class="text-gray-300 text-lg">ระบบเซิร์ฟเวอร์มีปัญหา กรุณารอสักครู่</p>
+        </div>
+        
+        <!-- แอนิเมชันเซิร์ฟเวอร์และสายไฟ -->
+        <div class="mb-12 floating">
+            <svg width="400" height="200" viewBox="0 0 400 200" class="mx-auto">
+                <!-- เซิร์ฟเวอร์ -->
+                <rect x="50" y="80" width="80" height="60" rx="5" fill="#374151" stroke="#6b7280" stroke-width="2"/>
+                <rect x="55" y="85" width="70" height="8" rx="2" fill="#1f2937"/>
+                <rect x="55" y="98" width="70" height="8" rx="2" fill="#1f2937"/>
+                <rect x="55" y="111" width="70" height="8" rx="2" fill="#1f2937"/>
+                <rect x="55" y="124" width="70" height="8" rx="2" fill="#1f2937"/>
                 
-                <div class="space-y-2">
-                    <label for="date" class="block text-sm font-medium text-gray-700">วันที่</label>
-                    <input type="date" id="date" name="date" required
-                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
+                <!-- ไฟสถานะเซิร์ฟเวอร์ -->
+                <circle cx="115" cy="89" r="3" class="server-error"/>
+                <circle cx="115" cy="102" r="3" fill="#22c55e"/>
+                <circle cx="115" cy="115" r="3" class="server-error"/>
+                <circle cx="115" cy="128" r="3" fill="#eab308"/>
                 
-                <div class="space-y-2">
-                    <label class="block text-sm font-medium text-gray-700">อัพรูปภาพ</label>
-                    <div class="flex flex-col items-center space-y-4">
-                        <div id="imagePreviewContainer" class="hidden w-40 h-40 border-2 border-dashed border-gray-300 rounded-full flex items-center justify-center overflow-hidden">
-                            <img id="imagePreview" class="w-full h-full object-cover" src="#" alt="ตัวอย่างรูปภาพ">
-                        </div>
-                        <div class="flex items-center justify-center w-full">
-                            <label for="imageUpload" class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
-                                <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                    <svg class="w-8 h-8 mb-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-                                    </svg>
-                                    <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">คลิกเพื่ออัพโหลด</span></p>
-                                    <p class="text-xs text-gray-500">PNG, JPG หรือ JPEG</p>
-                                </div>
-                                <input id="imageUpload" type="file" accept="image/*" class="hidden" />
-                            </label>
-                        </div>
-                    </div>
-                </div>
+                <!-- สายไฟที่ขาด -->
+                <path d="M130 110 Q180 110 220 110" stroke="#fbbf24" stroke-width="4" fill="none" class="wire-break"/>
+                <path d="M240 110 Q280 110 320 110" stroke="#fbbf24" stroke-width="4" fill="none" class="wire-break"/>
                 
-                <button type="submit" id="submitBtn" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors">
-                    บันทึกข้อมูล
-                </button>
-            </form>
-            
-            <!-- Loading Overlay -->
-            <div id="loadingOverlay" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
-                <div class="bg-white p-5 rounded-lg shadow-lg flex flex-col items-center">
-                    <div class="loader border-4 border-gray-200 rounded-full w-12 h-12 mb-4"></div>
-                    <p id="loadingText" class="text-gray-700">กำลังบันทึกข้อมูล...</p>
-                </div>
-            </div>
-            
-            <!-- Success Message -->
-            <div id="successMessage" class="hidden mt-4 p-4 bg-green-100 text-green-700 rounded-md">
-                <div class="flex items-center">
-                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                    </svg>
-                    <p>บันทึกข้อมูลสำเร็จ!</p>
-                </div>
-            </div>
-            
-            <!-- Error Message -->
-            <div id="errorMessage" class="hidden mt-4 p-4 bg-red-100 text-red-700 rounded-md">
-                <div class="flex items-center">
-                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
-                    </svg>
-                    <p id="errorText">เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง</p>
-                </div>
-            </div>
+                <!-- ประกายไฟ -->
+                <circle cx="220" cy="110" r="4" fill="#fbbf24" class="spark"/>
+                <circle cx="240" cy="110" r="4" fill="#f59e0b" class="spark" style="animation-delay: 0.5s;"/>
+                <circle cx="230" cy="105" r="2" fill="#fbbf24" class="spark" style="animation-delay: 0.8s;"/>
+                <circle cx="230" cy="115" r="2" fill="#f59e0b" class="spark" style="animation-delay: 1.2s;"/>
+                
+                <!-- เซิร์ฟเวอร์ปลายทาง -->
+                <rect x="320" y="80" width="80" height="60" rx="5" fill="#374151" stroke="#6b7280" stroke-width="2"/>
+                <rect x="325" y="85" width="70" height="8" rx="2" fill="#1f2937"/>
+                <rect x="325" y="98" width="70" height="8" rx="2" fill="#1f2937"/>
+                <rect x="325" y="111" width="70" height="8" rx="2" fill="#1f2937"/>
+                <rect x="325" y="124" width="70" height="8" rx="2" fill="#1f2937"/>
+                
+                <!-- ไฟสถานะเซิร์ฟเวอร์ปลายทาง (ดับ) -->
+                <circle cx="385" cy="89" r="3" fill="#4b5563"/>
+                <circle cx="385" cy="102" r="3" fill="#4b5563"/>
+                <circle cx="385" cy="115" r="3" fill="#4b5563"/>
+                <circle cx="385" cy="128" r="3" fill="#4b5563"/>
+                
+                <!-- เครื่องหมายเตือน -->
+                <polygon points="200,40 210,60 190,60" fill="#ef4444" class="flicker"/>
+                <text x="200" y="55" text-anchor="middle" fill="white" font-size="12" font-weight="bold">!</text>
+            </svg>
+        </div>
+        
+        <!-- ข้อความสถานะ -->
+        <div class="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-gray-600">
+            <p class="text-gray-300 mb-2">🔧 ทีมพัฒนากำลังแก้ไขปัญหา</p>
+            <p class="text-gray-400 text-sm">⚡ ตรวจสอบสายไฟและระบบเครือข่าย</p>
         </div>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('userForm');
-            const imageUpload = document.getElementById('imageUpload');
-            const imagePreview = document.getElementById('imagePreview');
-            const imagePreviewContainer = document.getElementById('imagePreviewContainer');
-            const loadingOverlay = document.getElementById('loadingOverlay');
-            const successMessage = document.getElementById('successMessage');
-            const errorMessage = document.getElementById('errorMessage');
-            const errorText = document.getElementById('errorText');
-            
-            // Set default date to today
-            document.getElementById('date').valueAsDate = new Date();
-            
-            // Handle image upload and preview
-            imageUpload.addEventListener('change', function(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(event) {
-                        imagePreview.src = event.target.result;
-                        imagePreviewContainer.classList.remove('hidden');
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-            
-            // Handle form submission
-            form.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                
-                const setNumber = document.getElementById('setNumber').value;
-                const date = document.getElementById('date').value;
-                const imageFile = imageUpload.files[0];
-                
-                if (!setNumber || !date || !imageFile) {
-                    showError('กรุณากรอกข้อมูลให้ครบถ้วน');
-                    return;
-                }
-                
-                showLoading('กำลังอัพโหลดและบันทึกข้อมูล...');
-                
-                try {
-                    // Convert image to base64
-                    const base64Image = await convertFileToBase64(imageFile);
-                    
-                    // Prepare data for submission
-                    const params = new URLSearchParams();
-                    params.append('setNumber', setNumber);
-                    params.append('date', date);
-                    params.append('fileName', imageFile.name);
-                    params.append('mimeType', imageFile.type);
-                    params.append('fileData', base64Image.split(',')[1]); // Remove the data:image/jpeg;base64, part
-                    
-                    // Submit data to Google Apps Script
-                    const scriptUrl = 'https://script.google.com/macros/s/AKfycbxVYgpEZW3WGftBHfoxXRh-4vGHgTUDLBqjv0y-uFhhrv8SSbJF48uD6VsabYF8v0It/exec';
-                    
-                    const response = await fetch(scriptUrl, {
-                        method: 'POST',
-                        body: params
-                    });
-                    
-                    const result = await response.json();
-                    
-                    if (result.success) {
-                        hideLoading();
-                        showSuccess();
-                        form.reset();
-                        document.getElementById('date').valueAsDate = new Date();
-                        imagePreviewContainer.classList.add('hidden');
-                    } else {
-                        throw new Error(result.error || 'เกิดข้อผิดพลาดในการบันทึกข้อมูล');
-                    }
-                } catch (error) {
-                    hideLoading();
-                    showError(error.message || 'เกิดข้อผิดพลาดในการเชื่อมต่อ');
-                    console.error('Error:', error);
-                }
-            });
-            
-            // Helper function to convert file to base64
-            function convertFileToBase64(file) {
-                return new Promise((resolve, reject) => {
-                    const reader = new FileReader();
-                    reader.onload = () => resolve(reader.result);
-                    reader.onerror = error => reject(error);
-                    reader.readAsDataURL(file);
-                });
-            }
-            
-            // UI Helper functions
-            function showLoading(message) {
-                document.getElementById('loadingText').textContent = message || 'กำลังดำเนินการ...';
-                loadingOverlay.classList.remove('hidden');
-            }
-            
-            function hideLoading() {
-                loadingOverlay.classList.add('hidden');
-            }
-            
-            function showSuccess() {
-                successMessage.classList.remove('hidden');
-                setTimeout(() => {
-                    successMessage.classList.add('hidden');
-                }, 5000);
-            }
-            
-            function showError(message) {
-                errorText.textContent = message;
-                errorMessage.classList.remove('hidden');
-                setTimeout(() => {
-                    errorMessage.classList.add('hidden');
-                }, 5000);
-            }
-        });
-    </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'963824e1010e731c',t:'MTc1MzI0MTg5Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9709ff99f0924f51',t:'MTc1NTQ0MjM4MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
